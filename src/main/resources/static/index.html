@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>GrainVault | Warehouse Management</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+        <div class="logo-icon">🌾</div>
+        <div>
+            <h2>GrainVault</h2>
+            <span>Storage Management</span>
+        </div>
+    </div>
+
+    <nav class="sidebar-nav">
+
+        <button class="nav-item active" onclick="showSection('dashboard', this)">
+            <span>▦</span> Dashboard
+        </button>
+
+        <button class="nav-item" onclick="showSection('warehouses', this)">
+            <span>🏭</span> Warehouses
+        </button>
+
+        <button class="nav-item" onclick="showSection('grainLots', this)">
+            <span>🌾</span> Grain Lots
+        </button>
+
+        <button class="nav-item" onclick="showSection('quality', this)">
+            <span>✓</span> Quality Grading
+        </button>
+
+        <button class="nav-item" onclick="showSection('purchases', this)">
+            <span>📦</span> Purchases
+        </button>
+
+        <button class="nav-item" onclick="showSection('sales', this)">
+            <span>🧾</span> Sales
+        </button>
+
+        <button class="nav-item" onclick="showSection('payments', this)">
+            <span>💳</span> Payments
+        </button>
+
+        <button class="nav-item" onclick="showSection('reports', this)">
+            <span>📊</span> Reports
+        </button>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+        <div class="online-status">
+            <span class="status-dot"></span>
+            System Online
+        </div>
+
+        <button class="logout-btn" onclick="logout()">
+            ⇥ Logout
+        </button>
+
+    </div>
+
+</aside>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="main-content">
+
+    <!-- TOP BAR -->
+
+    <header class="topbar">
+
+        <div>
+            <p class="small-label">WAREHOUSE SYSTEM</p>
+            <h1 id="pageTitle">Warehouse Dashboard</h1>
+        </div>
+
+        <div class="topbar-right">
+
+            <button class="notification-btn">
+                🔔
+                <span class="notification-dot"></span>
+            </button>
+
+            <div class="profile">
+
+                <div class="profile-avatar" id="profileAvatar">
+                    A
+                </div>
+
+                <div>
+                    <strong id="usernameDisplay">Admin</strong>
+                    <span>Warehouse Director</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= DASHBOARD ================= -->
+
+    <section id="dashboard" class="page-section active-section">
+
+        <div class="welcome-section">
+
+            <div>
+                <p class="eyebrow">DIGITAL GRAIN MANAGEMENT</p>
+
+                <h2>
+                    Manage your grain
+                    <span>storage smarter.</span>
+                </h2>
+
+                <p class="welcome-text">
+                    Monitor warehouse capacity, grain quality, procurement,
+                    sales and financial activities from one centralized dashboard.
+                </p>
+
+                <button class="primary-btn" onclick="openGrainModal()">
+                    + Add Grain Lot
+                </button>
+            </div>
+
+            <div class="hero-icon">🌾</div>
+
+        </div>
+
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+                <div class="stat-icon green">🏭</div>
+                <div>
+                    <span>Total Warehouses</span>
+                    <h3 id="warehouseCount">0</h3>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon orange">🌾</div>
+                <div>
+                    <span>Grain Lots</span>
+                    <h3 id="grainLotCount">0</h3>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon blue">📦</div>
+                <div>
+                    <span>Storage Used</span>
+                    <h3 id="storageUsed">0</h3>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon purple">💰</div>
+                <div>
+                    <span>Inventory Value</span>
+                    <h3 id="inventoryValue">₹0</h3>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="dashboard-grid">
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <p class="panel-label">WAREHOUSE CAPACITY</p>
+                        <h3>Storage Overview</h3>
+                    </div>
+
+                    <button class="view-btn"
+                            onclick="showSection('warehouses')">
+                        View All
+                    </button>
+
+                </div>
+
+                <div id="warehouseOverview" class="empty-state">
+
+                    <div>🏭</div>
+
+                    <p>No warehouses created yet.</p>
+
+                    <button class="secondary-btn"
+                            onclick="showSection('warehouses')">
+                        Add Warehouse
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <p class="panel-label">RECENT ACTIVITY</p>
+                        <h3>Latest Grain Lots</h3>
+                    </div>
+
+                    <button class="view-btn"
+                            onclick="showSection('grainLots')">
+                        View All
+                    </button>
+
+                </div>
+
+                <div id="recentLots" class="empty-state">
+
+                    <div>🌾</div>
+
+                    <p>No grain lots available.</p>
+
+                    <button class="secondary-btn"
+                            onclick="openGrainModal()">
+                        Add Grain Lot
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= WAREHOUSES ================= -->
+
+    <section id="warehouses" class="page-section">
+
+        <div class="section-heading">
+
+            <div>
+                <p class="eyebrow">STORAGE FACILITIES</p>
+                <h2>Warehouses</h2>
+                <p>Manage warehouse locations and storage capacity.</p>
+            </div>
+
+            <button class="primary-btn"
+                    onclick="openWarehouseModal()">
+                + Add Warehouse
+            </button>
+
+        </div>
+
+        <div id="warehouseList" class="card-grid"></div>
+
+    </section>
+
+
+    <!-- ================= GRAIN LOTS ================= -->
+
+    <section id="grainLots" class="page-section">
+
+        <div class="section-heading">
+
+            <div>
+                <p class="eyebrow">INVENTORY</p>
+                <h2>Grain Lots</h2>
+                <p>Track incoming grain and storage quantities.</p>
+            </div>
+
+            <button class="primary-btn"
+                    onclick="openGrainModal()">
+                + Add Grain Lot
+            </button>
+
+        </div>
+
+        <div id="grainLotList" class="card-grid"></div>
+
+    </section>
+
+
+    <!-- ================= QUALITY ================= -->
+
+    <section id="quality" class="page-section">
+
+        <div class="section-heading">
+
+            <div>
+                <p class="eyebrow">QUALITY CONTROL</p>
+                <h2>Quality Grading</h2>
+                <p>Evaluate moisture, foreign matter and damaged grain.</p>
+            </div>
+
+        </div>
+
+        <div class="info-panel">
+
+            <div class="big-icon">✓</div>
+
+            <h3>Automated Quality Grading</h3>
+
+            <p>
+                The system automatically assigns a grain grade based on
+                moisture, foreign matter and damaged grain values.
+            </p>
+
+            <div class="grade-rules">
+
+                <div>
+                    <strong>GRADE A</strong>
+                    <span>Moisture ≤ 14%</span>
+                </div>
+
+                <div>
+                    <strong>SUB-STANDARD</strong>
+                    <span>Values above limits</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= PURCHASES ================= -->
+
+    <section id="purchases" class="page-section">
+
+        <div class="section-heading">
+
+            <div>
+                <p class="eyebrow">PROCUREMENT</p>
+                <h2>Purchases</h2>
+                <p>Purchase Order → Vendor Bill → Vendor Payment</p>
+            </div>
+
+        </div>
+
+
+        <div class="module-grid">
+
+            <!-- PURCHASE ORDER -->
+
+            <div class="module-card">
+
+                <div class="module-icon">📦</div>
+
+                <h3>Purchase Order</h3>
+
+                <p>
+                    Create a grain procurement order from a vendor.
+                </p>
+
+                <button class="primary-btn action-btn"
+                        onclick="openPurchaseOrderModal()">
+                    + Create Purchase Order
+                </button>
+
+            </div>
+
+
+            <!-- VENDOR BILL -->
+
+            <div class="module-card">
+
+                <div class="module-icon">🧾</div>
+
+                <h3>Vendor Bill</h3>
+
+                <p>
+                    Create a bill from an existing purchase order.
+                </p>
+
+                <button class="primary-btn action-btn"
+                        onclick="openVendorBillModal()">
+                    + Create Vendor Bill
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="data-panel">
+
+            <div class="panel-header">
+                <div>
+                    <p class="panel-label">PURCHASE ORDERS</p>
+                    <h3>Purchase Order History</h3>
+                </div>
+
+                <button class="view-btn"
+                        onclick="loadPurchaseOrders()">
+                    Refresh
+                </button>
+            </div>
+
+            <div id="purchaseOrderList"></div>
+
+        </div>
+
+
+        <div class="data-panel">
+
+            <div class="panel-header">
+                <div>
+                    <p class="panel-label">VENDOR BILLS</p>
+                    <h3>Vendor Bill History</h3>
+                </div>
+
+                <button class="view-btn"
+                        onclick="loadVendorBills()">
+                    Refresh
+                </button>
+            </div>
+
+            <div id="vendorBillList"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= SALES ================= -->
+
+    <section id="sales" class="page-section">
+
+        <div class="section-heading">
+
+            <div>
+                <p class="eyebrow">DISTRIBUTION</p>
+                <h2>Sales</h2>
+                <p>Sales Order → Customer Invoice → Customer Receipt</p>
+            </div>
+
+        </div>
+
+
+        <div class="module-grid">
+
+            <!-- SALES ORDER -->
+
+            <div class="module-card">
+
+                <div class="module-icon">🧾</div>
+
+                <h3>Sales Order</h3>
+
+                <p>
+                    Create an order for a PDS distribution agency.
+                </p>
+
+                <button class="primary-btn action-btn"
+                        onclick="openSalesOrderModal()">
+                    + Create Sales Order
+                </button>
+
+            </div>
+
+
+            <!-- CUSTOMER INVOICE -->
+
+            <div class="module-card">
+
+                <div class="module-icon">💰</div>
+
+                <h3>Customer Invoice</h3>
+
+                <p>
+                    Create an invoice from an existing sales order.
+                </p>
+
+                <button class="primary-btn action-btn"
+                        onclick="openCustomerInvoiceModal()">
+                    + Create Customer Invoice
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="data-panel">
+
+            <div class="panel-header">
+
+                <div>
+                    <p class="panel-label">SALES ORDERS</p>
+                    <h3>Sales Order History</h3>
+                </div>
+
+                <button class="view-btn"
+                        onclick="loadSalesOrders()">
+                    Refresh
+                </button>
+
+            </div>
+
+            <div id="salesOrderList"></div>
+
+        </div>
+
+
+        <div class="data-panel">
+
+            <div class="panel-header">
+
+                <div>
+                    <p class="panel-label">CUSTOMER INVOICES</p>
+                    <h3>Customer Invoice History</h3>
+                </div>
+
+                <button class="view-btn"
+                        onclick="loadCustomerInvoices()">
+                    Refresh
+                </button>
+
+            </div>
+
+            <div id="customerInvoiceList"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= PAYMENTS ================= -->
+
+    <section id="payments" class="page-section">
+
+        <div class="section-heading">
+
+            <div>
+                <p class="eyebrow">FINANCE</p>
+                <h2>Payments</h2>
+                <p>Track vendor payments and customer receipts.</p>
+            </div>
+
+        </div>
+
+
+        <div class="module-grid">
+
+            <div class="module-card">
+
+                <div class="module-icon">💳</div>
+
+                <h3>Vendor Payment</h3>
+
+                <p>
+                    Record money paid to a grain supplier.
+                </p>
+
+                <button class="primary-btn action-btn"
+                        onclick="openVendorPaymentModal()">
+                    + Make Vendor Payment
+                </button>
+
+            </div>
+
+
+            <div class="module-card">
+
+                <div class="module-icon">💵</div>
+
+                <h3>Customer Receipt</h3>
+
+                <p>
+                    Record money received from a PDS agency.
+                </p>
+
+                <button class="primary-btn action-btn"
+                        onclick="openCustomerReceiptModal()">
+                    + Record Customer Receipt
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="data-panel">
+
+            <div class="panel-header">
+
+                <div>
+                    <p class="panel-label">PAYMENT HISTORY</p>
+                    <h3>Payments & Receipts</h3>
+                </div>
+
+                <button class="view-btn"
+                        onclick="loadPayments()">
+                    Refresh
+                </button>
+
+            </div>
+
+            <div id="paymentList"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= REPORTS ================= -->
+
+    <section id="reports" class="page-section">
+
+        <div class="section-heading">
+
+            <div>
+                <p class="eyebrow">FINANCIAL ANALYSIS</p>
+                <h2>Reports</h2>
+                <p>View warehouse financial and budget reports.</p>
+            </div>
+
+        </div>
+
+        <div class="report-grid">
+
+            <div class="report-card">
+                <span>📊</span>
+                <h3>Balance Sheet</h3>
+                <p>View assets, liabilities and equity.</p>
+                <button onclick="loadReport('balance-sheet')">
+                    View Report
+                </button>
+            </div>
+
+            <div class="report-card">
+                <span>📈</span>
+                <h3>Profit & Loss</h3>
+                <p>View income and expenditure.</p>
+                <button onclick="loadReport('profit-loss')">
+                    View Report
+                </button>
+            </div>
+
+            <div class="report-card">
+                <span>💰</span>
+                <h3>Budget</h3>
+                <p>Compare planned and actual expenditure.</p>
+                <button onclick="loadReport('budget')">
+                    View Report
+                </button>
+            </div>
+
+        </div>
+
+        <div id="reportResult" class="report-result"></div>
+
+    </section>
+
+</main>
+
+
+<!-- ===================================================== -->
+<!-- WAREHOUSE MODAL -->
+<!-- ===================================================== -->
+
+<div id="warehouseModal" class="modal">
+
+    <div class="modal-box">
+
+        <button class="close-btn" onclick="closeWarehouseModal()">×</button>
+
+        <p class="eyebrow">NEW FACILITY</p>
+
+        <h2>Add Warehouse</h2>
+
+        <p class="modal-subtitle">
+            Enter warehouse details and storage capacity.
+        </p>
+
+        <form onsubmit="createWarehouse(event)">
+
+            <label>Warehouse Name</label>
+            <input type="text"
+                   id="warehouseName"
+                   placeholder="Central Grain Warehouse"
+                   required>
+
+            <label>Location</label>
+            <input type="text"
+                   id="warehouseLocation"
+                   placeholder="Pollachi"
+                   required>
+
+            <label>Total Capacity</label>
+            <input type="number"
+                   id="warehouseCapacity"
+                   placeholder="10000"
+                   min="1"
+                   required>
+
+            <button class="primary-btn full-btn" type="submit">
+                Create Warehouse
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- ===================================================== -->
+<!-- GRAIN LOT MODAL -->
+<!-- ===================================================== -->
+
+<div id="grainModal" class="modal">
+
+    <div class="modal-box large-modal">
+
+        <button class="close-btn" onclick="closeGrainModal()">×</button>
+
+        <p class="eyebrow">INVENTORY ENTRY</p>
+
+        <h2>Add Grain Lot</h2>
+
+        <p class="modal-subtitle">
+            Add incoming grain to a warehouse.
+        </p>
+
+        <form onsubmit="createGrainLot(event)">
+
+            <div class="form-grid">
+
+                <div>
+                    <label>Lot Number</label>
+                    <input type="text"
+                           id="lotNumber"
+                           placeholder="LOT-001"
+                           required>
+                </div>
+
+                <div>
+                    <label>Warehouse ID</label>
+                    <input type="number"
+                           id="grainWarehouseId"
+                           placeholder="1"
+                           min="1"
+                           required>
+                </div>
+
+                <div>
+                    <label>Vendor ID</label>
+                    <input type="number"
+                           id="vendorId"
+                           placeholder="1"
+                           min="1"
+                           required>
+                </div>
+
+                <div>
+                    <label>Product ID</label>
+                    <input type="number"
+                           id="productId"
+                           placeholder="1"
+                           min="1"
+                           required>
+                </div>
+
+                <div>
+                    <label>Quantity</label>
+                    <input type="number"
+                           id="grainQuantity"
+                           placeholder="1000"
+                           min="1"
+                           step="0.01"
+                           required>
+                </div>
+
+                <div>
+                    <label>Price per Unit</label>
+                    <input type="number"
+                           id="grainPrice"
+                           placeholder="25"
+                           min="0"
+                           step="0.01"
+                           required>
+                </div>
+
+            </div>
+
+            <button class="primary-btn full-btn" type="submit">
+                Add Grain Lot
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- ===================================================== -->
+<!-- PURCHASE ORDER MODAL -->
+<!-- ===================================================== -->
+
+<div id="purchaseOrderModal" class="modal">
+
+    <div class="modal-box large-modal">
+
+        <button class="close-btn"
+                onclick="closeModal('purchaseOrderModal')">
+            ×
+        </button>
+
+        <p class="eyebrow">PROCUREMENT</p>
+
+        <h2>Create Purchase Order</h2>
+
+        <p class="modal-subtitle">
+            Create an order for grain procurement.
+        </p>
+
+        <form onsubmit="createPurchaseOrder(event)">
+
+            <label>Order Number</label>
+            <input type="text"
+                   id="purchaseOrderNumber"
+                   placeholder="PO-001"
+                   required>
+
+            <div class="form-grid">
+
+                <div>
+                    <label>Vendor ID</label>
+                    <input type="number"
+                           id="purchaseVendorId"
+                           min="1"
+                           placeholder="1"
+                           required>
+                </div>
+
+                <div>
+                    <label>Product ID</label>
+                    <input type="number"
+                           id="purchaseProductId"
+                           min="1"
+                           placeholder="1"
+                           required>
+                </div>
+
+                <div>
+                    <label>Quantity</label>
+                    <input type="number"
+                           id="purchaseQuantity"
+                           min="0.01"
+                           step="0.01"
+                           placeholder="1000"
+                           required>
+                </div>
+
+                <div>
+                    <label>Price per Unit</label>
+                    <input type="number"
+                           id="purchasePrice"
+                           min="0"
+                           step="0.01"
+                           placeholder="40"
+                           required>
+                </div>
+
+            </div>
+
+            <button class="primary-btn full-btn" type="submit">
+                Create Purchase Order
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- ===================================================== -->
+<!-- VENDOR BILL MODAL -->
+<!-- ===================================================== -->
+
+<div id="vendorBillModal" class="modal">
+
+    <div class="modal-box">
+
+        <button class="close-btn"
+                onclick="closeModal('vendorBillModal')">
+            ×
+        </button>
+
+        <p class="eyebrow">VENDOR BILL</p>
+
+        <h2>Create Vendor Bill</h2>
+
+        <p class="modal-subtitle">
+            Create a bill using a purchase order.
+        </p>
+
+        <form onsubmit="createVendorBill(event)">
+
+            <label>Bill Number</label>
+            <input type="text"
+                   id="vendorBillNumber"
+                   placeholder="VB-001"
+                   required>
+
+            <label>Vendor ID</label>
+            <input type="number"
+                   id="billVendorId"
+                   min="1"
+                   placeholder="1"
+                   required>
+
+            <label>Purchase Order ID</label>
+            <input type="number"
+                   id="billPurchaseOrderId"
+                   min="1"
+                   placeholder="1"
+                   required>
+
+            <label>Bill Amount</label>
+            <input type="number"
+                   id="vendorBillAmount"
+                   min="0.01"
+                   step="0.01"
+                   placeholder="40000"
+                   required>
+
+            <button class="primary-btn full-btn" type="submit">
+                Create Vendor Bill
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- ===================================================== -->
+<!-- SALES ORDER MODAL -->
+<!-- ===================================================== -->
+
+<div id="salesOrderModal" class="modal">
+
+    <div class="modal-box large-modal">
+
+        <button class="close-btn"
+                onclick="closeModal('salesOrderModal')">
+            ×
+        </button>
+
+        <p class="eyebrow">DISTRIBUTION</p>
+
+        <h2>Create Sales Order</h2>
+
+        <p class="modal-subtitle">
+            Create an order for a PDS distribution agency.
+        </p>
+
+        <form onsubmit="createSalesOrder(event)">
+
+            <label>Order Number</label>
+            <input type="text"
+                   id="salesOrderNumber"
+                   placeholder="SO-001"
+                   required>
+
+            <div class="form-grid">
+
+                <div>
+                    <label>Customer ID</label>
+                    <input type="number"
+                           id="salesCustomerId"
+                           min="1"
+                           placeholder="2"
+                           required>
+                </div>
+
+                <div>
+                    <label>Product ID</label>
+                    <input type="number"
+                           id="salesProductId"
+                           min="1"
+                           placeholder="1"
+                           required>
+                </div>
+
+                <div>
+                    <label>Quantity</label>
+                    <input type="number"
+                           id="salesQuantity"
+                           min="0.01"
+                           step="0.01"
+                           placeholder="500"
+                           required>
+                </div>
+
+                <div>
+                    <label>Price per Unit</label>
+                    <input type="number"
+                           id="salesPrice"
+                           min="0"
+                           step="0.01"
+                           placeholder="45"
+                           required>
+                </div>
+
+            </div>
+
+            <button class="primary-btn full-btn" type="submit">
+                Create Sales Order
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- ===================================================== -->
+<!-- CUSTOMER INVOICE MODAL -->
+<!-- ===================================================== -->
+
+<div id="customerInvoiceModal" class="modal">
+
+    <div class="modal-box">
+
+        <button class="close-btn"
+                onclick="closeModal('customerInvoiceModal')">
+            ×
+        </button>
+
+        <p class="eyebrow">CUSTOMER INVOICE</p>
+
+        <h2>Create Customer Invoice</h2>
+
+        <p class="modal-subtitle">
+            Create an invoice from a sales order.
+        </p>
+
+        <form onsubmit="createCustomerInvoice(event)">
+
+            <label>Invoice Number</label>
+            <input type="text"
+                   id="customerInvoiceNumber"
+                   placeholder="INV-001"
+                   required>
+
+            <label>Customer ID</label>
+            <input type="number"
+                   id="invoiceCustomerId"
+                   min="1"
+                   placeholder="2"
+                   required>
+
+            <label>Sales Order ID</label>
+            <input type="number"
+                   id="invoiceSalesOrderId"
+                   min="1"
+                   placeholder="1"
+                   required>
+
+            <label>Invoice Amount</label>
+            <input type="number"
+                   id="customerInvoiceAmount"
+                   min="0.01"
+                   step="0.01"
+                   placeholder="22500"
+                   required>
+
+            <button class="primary-btn full-btn" type="submit">
+                Create Customer Invoice
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- ===================================================== -->
+<!-- VENDOR PAYMENT MODAL -->
+<!-- ===================================================== -->
+
+<div id="vendorPaymentModal" class="modal">
+
+    <div class="modal-box">
+
+        <button class="close-btn"
+                onclick="closeModal('vendorPaymentModal')">
+            ×
+        </button>
+
+        <p class="eyebrow">OUTGOING PAYMENT</p>
+
+        <h2>Vendor Payment</h2>
+
+        <p class="modal-subtitle">
+            Pay a vendor bill.
+        </p>
+
+        <form onsubmit="createVendorPayment(event)">
+
+            <label>Payment Number</label>
+            <input type="text"
+                   id="vendorPaymentNumber"
+                   placeholder="VP-001"
+                   required>
+
+            <label>Vendor Bill ID</label>
+            <input type="number"
+                   id="vendorPaymentReferenceId"
+                   min="1"
+                   placeholder="1"
+                   required>
+
+            <label>Amount</label>
+            <input type="number"
+                   id="vendorPaymentAmount"
+                   min="0.01"
+                   step="0.01"
+                   placeholder="40000"
+                   required>
+
+            <label>Payment Mode</label>
+
+            <select id="vendorPaymentMode" required>
+                <option value="">Select Mode</option>
+                <option value="CASH">Cash</option>
+                <option value="BANK">Bank Transfer</option>
+                <option value="UPI">UPI</option>
+            </select>
+
+            <button class="primary-btn full-btn" type="submit">
+                Make Vendor Payment
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- ===================================================== -->
+<!-- CUSTOMER RECEIPT MODAL -->
+<!-- ===================================================== -->
+
+<div id="customerReceiptModal" class="modal">
+
+    <div class="modal-box">
+
+        <button class="close-btn"
+                onclick="closeModal('customerReceiptModal')">
+            ×
+        </button>
+
+        <p class="eyebrow">INCOMING PAYMENT</p>
+
+        <h2>Customer Receipt</h2>
+
+        <p class="modal-subtitle">
+            Record payment received from a customer.
+        </p>
+
+        <form onsubmit="createCustomerReceipt(event)">
+
+            <label>Receipt Number</label>
+            <input type="text"
+                   id="customerReceiptNumber"
+                   placeholder="CR-001"
+                   required>
+
+            <label>Customer Invoice ID</label>
+            <input type="number"
+                   id="customerReceiptReferenceId"
+                   min="1"
+                   placeholder="1"
+                   required>
+
+            <label>Amount Received</label>
+            <input type="number"
+                   id="customerReceiptAmount"
+                   min="0.01"
+                   step="0.01"
+                   placeholder="22500"
+                   required>
+
+            <label>Payment Mode</label>
+
+            <select id="customerReceiptMode" required>
+                <option value="">Select Mode</option>
+                <option value="CASH">Cash</option>
+                <option value="BANK">Bank Transfer</option>
+                <option value="UPI">UPI</option>
+            </select>
+
+            <button class="primary-btn full-btn" type="submit">
+                Record Customer Receipt
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script src="/js/script.js"></script>
+
+</body>
+</html>

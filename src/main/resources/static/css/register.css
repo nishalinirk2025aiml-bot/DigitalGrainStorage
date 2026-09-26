@@ -1,0 +1,556 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    min-height: 100vh;
+    background: #f5f8f4;
+    color: #1d2b22;
+}
+
+.register-page {
+    min-height: 100vh;
+    display: flex;
+}
+
+
+/* =========================
+   LEFT BRAND
+========================= */
+
+.register-brand {
+    width: 48%;
+    min-height: 100vh;
+    padding: 45px 65px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #123f29,
+            #287443
+        );
+
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    position: relative;
+    overflow: hidden;
+}
+
+.register-brand::before {
+    content: "";
+    position: absolute;
+
+    width: 500px;
+    height: 500px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.05);
+
+    right: -200px;
+    top: -180px;
+}
+
+.register-brand::after {
+    content: "";
+    position: absolute;
+
+    width: 350px;
+    height: 350px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.05);
+
+    left: -160px;
+    bottom: -130px;
+}
+
+
+/* LOGO */
+
+.brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    position: relative;
+    z-index: 2;
+}
+
+.brand-icon {
+    width: 52px;
+    height: 52px;
+
+    border-radius: 15px;
+
+    background: rgba(255,255,255,0.13);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 27px;
+}
+
+.brand-logo h2 {
+    font-size: 22px;
+}
+
+.brand-logo span {
+    font-size: 12px;
+    opacity: 0.65;
+}
+
+
+/* CONTENT */
+
+.brand-content {
+    position: relative;
+    z-index: 2;
+
+    max-width: 540px;
+}
+
+.brand-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    opacity: 0.65;
+    font-weight: 700;
+}
+
+.brand-content h1 {
+    font-size: 47px;
+    line-height: 1.12;
+
+    margin: 18px 0 22px;
+}
+
+.brand-content h1 span {
+    color: #c8f17d;
+}
+
+.brand-content p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.78);
+}
+
+
+/* STATS */
+
+.stats {
+    display: flex;
+    gap: 12px;
+    margin-top: 35px;
+}
+
+.stat {
+    padding: 14px 17px;
+
+    background: rgba(255,255,255,0.09);
+
+    border-radius: 13px;
+
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    font-size: 12px;
+}
+
+.stat strong {
+    font-size: 18px;
+}
+
+
+/* FOOTER */
+
+.brand-footer {
+    position: relative;
+    z-index: 2;
+
+    font-size: 12px;
+    opacity: 0.55;
+}
+
+
+/* =========================
+   REGISTER FORM
+========================= */
+
+.register-container {
+    width: 52%;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 30px;
+}
+
+.register-card {
+    width: 100%;
+    max-width: 455px;
+
+    background: white;
+
+    padding: 38px 42px;
+
+    border-radius: 24px;
+
+    box-shadow:
+        0 25px 60px rgba(30,70,40,0.10);
+}
+
+
+/* HEADER */
+
+.register-header {
+    margin-bottom: 25px;
+}
+
+.register-header h1 {
+    font-size: 29px;
+    margin-bottom: 7px;
+}
+
+.register-header p {
+    font-size: 14px;
+    color: #77837b;
+}
+
+
+/* INPUT */
+
+.input-group {
+    margin-bottom: 18px;
+}
+
+.input-group label {
+    display: block;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    margin-bottom: 7px;
+
+    color: #344138;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.input-wrapper > span {
+    position: absolute;
+
+    left: 14px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    font-size: 16px;
+}
+
+.input-wrapper input {
+    width: 100%;
+    height: 50px;
+
+    border: 1px solid #dbe5dc;
+
+    border-radius: 11px;
+
+    padding: 0 43px;
+
+    outline: none;
+
+    font-size: 14px;
+
+    background: #fbfdfb;
+
+    transition: 0.25s;
+}
+
+.input-wrapper input:focus {
+    border-color: #3b8b4e;
+
+    box-shadow:
+        0 0 0 4px rgba(59,139,78,0.10);
+
+    background: white;
+}
+
+.input-wrapper input::placeholder {
+    color: #a2aaa5;
+}
+
+
+/* SHOW PASSWORD */
+
+.input-wrapper button {
+    position: absolute;
+
+    right: 12px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    border: none;
+    background: transparent;
+
+    cursor: pointer;
+
+    font-size: 15px;
+}
+
+
+/* PASSWORD STRENGTH */
+
+.password-strength {
+    margin-top: -5px;
+    margin-bottom: 20px;
+}
+
+.strength-bar {
+    height: 4px;
+
+    width: 100%;
+
+    background: #e8eee9;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+.strength-bar span {
+    display: block;
+
+    height: 100%;
+    width: 0%;
+
+    background: #45a35a;
+
+    transition: 0.3s;
+}
+
+.password-strength p {
+    font-size: 11px;
+    margin-top: 5px;
+    color: #89938d;
+}
+
+
+/* TERMS */
+
+.terms {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 8px;
+
+    font-size: 11px;
+
+    color: #737e76;
+
+    margin-bottom: 20px;
+
+    line-height: 1.5;
+
+    cursor: pointer;
+}
+
+.terms input {
+    margin-top: 2px;
+    accent-color: #358149;
+}
+
+
+/* BUTTON */
+
+.create-button {
+    width: 100%;
+    height: 51px;
+
+    border: none;
+
+    border-radius: 11px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #28763e,
+            #439952
+        );
+
+    color: white;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.25s;
+
+    box-shadow:
+        0 8px 20px rgba(40,118,62,0.20);
+}
+
+.create-button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 25px rgba(40,118,62,0.27);
+}
+
+.create-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+
+/* LOADER */
+
+.loader {
+    display: none;
+
+    width: 16px;
+    height: 16px;
+
+    border: 2px solid rgba(255,255,255,0.4);
+
+    border-top-color: white;
+
+    border-radius: 50%;
+
+    animation: spin 0.8s linear infinite;
+
+    margin-left: 7px;
+
+    vertical-align: middle;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* LOGIN LINK */
+
+.login-link {
+    text-align: center;
+
+    margin-top: 23px;
+
+    font-size: 12px;
+
+    color: #7b857e;
+}
+
+.login-link a {
+    color: #307c43;
+
+    text-decoration: none;
+
+    font-weight: 700;
+
+    margin-left: 4px;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+
+/* MESSAGE */
+
+.message {
+    display: none;
+
+    padding: 11px 13px;
+
+    border-radius: 10px;
+
+    font-size: 12px;
+
+    margin-bottom: 17px;
+}
+
+.message.error {
+    display: block;
+
+    color: #c0392b;
+
+    background: #fff1f0;
+
+    border: 1px solid #ffd5d1;
+}
+
+.message.success {
+    display: block;
+
+    color: #28743c;
+
+    background: #effaf1;
+
+    border: 1px solid #ccebd1;
+}
+
+
+/* MOBILE */
+
+.mobile-brand {
+    display: none;
+}
+
+
+@media (max-width: 900px) {
+
+    .register-brand {
+        display: none;
+    }
+
+    .register-container {
+        width: 100%;
+        padding: 18px;
+    }
+
+    .mobile-brand {
+        display: block;
+
+        text-align: center;
+
+        color: #2b7b40;
+
+        font-size: 20px;
+
+        font-weight: 700;
+
+        margin-bottom: 20px;
+    }
+}
+
+
+@media (max-width: 450px) {
+
+    .register-card {
+        padding: 28px 20px;
+        border-radius: 18px;
+    }
+
+    .register-header h1 {
+        font-size: 25px;
+    }
+}
